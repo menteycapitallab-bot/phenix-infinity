@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: asistente-phenix-infinity
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port 8000 --timeout-keep-alive 75
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: TELEGRAM_CHAT_ID
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 8000
+      - key: WEBAPP_URL
+        value: https://asistente-phenix-infinity-1.onrender.com
+      - key: PYTHONUNBUFFERED
+        value: "1"

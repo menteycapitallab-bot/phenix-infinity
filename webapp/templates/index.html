@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificación de Producción - Alexander Román</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <div class="logo">🥖 🍕 🥐</div>
+            <h1>Producción de Mañana</h1>
+            <p>Selecciona las cantidades para calcular insumos y lista de compras</p>
+        </header>
+
+        <form id="production-form">
+            <!-- Panadería Venezolana -->
+            <section class="card">
+                <h2>🥖 Panadería Venezolana</h2>
+                <div class="form-group">
+                    <label for="cachitos">Cachitos Venezolanos (Jamón/Queso)</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('cachitos', -1)">-</button>
+                        <input type="number" id="cachitos" name="cachitos" value="30" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('cachitos', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="panes_piñitas">Panes Piñitas (Pan Dulce)</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('panes_piñitas', -1)">-</button>
+                        <input type="number" id="panes_piñitas" name="panes_piñitas" value="40" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('panes_piñitas', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="panes_de_queso">Panes de Queso</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('panes_de_queso', -1)">-</button>
+                        <input type="number" id="panes_de_queso" name="panes_de_queso" value="25" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('panes_de_queso', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="baguette">Baguettes / Pan Francés</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('baguette', -1)">-</button>
+                        <input type="number" id="baguette" name="baguette" value="20" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('baguette', 1)">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tequeños y Pastelitos -->
+            <section class="card">
+                <h2>🥐 Tequeños y Pastelitos</h2>
+                <div class="form-group">
+                    <label for="tequeños_grandes">Tequeños Grandes</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('tequeños_grandes', -1)">-</button>
+                        <input type="number" id="tequeños_grandes" name="tequeños_grandes" value="50" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('tequeños_grandes', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pastelitos_grandes">Pastelitos Grandes (Carne/Pollo/Queso)</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('pastelitos_grandes', -1)">-</button>
+                        <input type="number" id="pastelitos_grandes" name="pastelitos_grandes" value="40" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('pastelitos_grandes', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pasapalos">Pasapalos (Docenas de Mini Tequeños/Pastelitos)</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('pasapalos', -1)">-</button>
+                        <input type="number" id="pasapalos" name="pasapalos" value="5" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('pasapalos', 1)">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pizzería -->
+            <section class="card">
+                <h2>🍕 Pizzería</h2>
+                <div class="form-group">
+                    <label for="pizza_familiar">Pizzas Familiares</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('pizza_familiar', -1)">-</button>
+                        <input type="number" id="pizza_familiar" name="pizza_familiar" value="20" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('pizza_familiar', 1)">+</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="pizza_personal">Pizzas Personales</label>
+                    <div class="counter-input">
+                        <button type="button" class="btn-minus" onclick="adjustValue('pizza_personal', -1)">-</button>
+                        <input type="number" id="pizza_personal" name="pizza_personal" value="15" min="0">
+                        <button type="button" class="btn-plus" onclick="adjustValue('pizza_personal', 1)">+</button>
+                    </div>
+                </div>
+            </section>
+
+            <button type="submit" class="btn-submit" id="submit-btn">
+                💾 Guardar y Calcular Lista de Compras
+            </button>
+        </form>
+
+        <div id="result-modal" class="modal hidden">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h3>📊 Consumo Estimado de Insumos</h3>
+                <div id="result-summary"></div>
+                <button class="btn-primary" onclick="confirmAndClose()">Confirmar en Telegram</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
