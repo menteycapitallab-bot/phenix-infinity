@@ -1,0 +1,24 @@
+name: Phenix Infinity - alertas
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "*/5 * * * *"
+      timezone: "America/Santiago"
+
+permissions:
+  contents: read
+
+jobs:
+  send-alert:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar el proyecto
+        uses: actions/checkout@v4
+
+      - name: Enviar la alerta que corresponde
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/github_alerts.py
