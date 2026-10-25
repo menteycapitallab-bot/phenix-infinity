@@ -14,8 +14,11 @@ variables > Actions`:
 - `GEMINI_API_KEY` (opcional; se usa una receta de respaldo si falta)
 
 GitHub Actions no mantiene un proceso permanente: ejecuta tareas breves y puede
-retrasar una ejecución programada. El panel web sigue necesitando un servicio
-web, como Render Free.
+retrasar una ejecución programada. Para este proyecto básico no necesitamos
+Google Cloud ni Render: las alertas se gestionan directamente desde GitHub.
+
+Para enviar un mensaje de prueba, abre el workflow en GitHub, pulsa `Run
+workflow` y marca `Enviar un mensaje de prueba a Telegram`.
 
 ---
 *Proyecto gestionado por Antigravity AI Assistant.*

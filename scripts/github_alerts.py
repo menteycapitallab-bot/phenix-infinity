@@ -79,6 +79,11 @@ def send_message(text: str) -> None:
 
 
 def main() -> None:
+    if os.environ.get("TEST_ALERT", "").lower() == "true":
+        send_message("✅ **Phenix Infinity está funcionando**\n\nEste es un mensaje de prueba enviado automáticamente por GitHub.")
+        print("Mensaje de prueba enviado.")
+        return
+
     now = datetime.now(TZ)
     due_alert = next(
         (alert for alert_time, alert in ALERTS.items()
